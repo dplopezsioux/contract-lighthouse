@@ -1,38 +1,52 @@
-version: '3.1'
+version: "3.8"
 
 services:
-
-  mongo:
-    image: mongo:4.4.6
-    restart: always
+  mongodb:
+    image: mongodb/mongodb-community-server:6.0-ubi8
     environment:
       MONGO_INITDB_ROOT_USERNAME: greenhurricane
       MONGO_INITDB_ROOT_PASSWORD: mGZKfLHmkknev4ccMR6w
     volumes:
-      - ./mongo-data:/data/db
+      - data:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - web_network
 
   mongo-express:
-    image: mongo-express:0.54.0
-    restart: always
-    ports:
-      - 8081:8081
+    image: mongo-express:1.0.0-20-alpine3.18
     environment:
+      ME_CONFIG_OPTIONS_EDITORTHEME: "ambiance"
       ME_CONFIG_MONGODB_ADMINUSERNAME: greenhurricane
       ME_CONFIG_MONGODB_ADMINPASSWORD: mGZKfLHmkknev4ccMR6w
-      ME_CONFIG_BASICAUTH_USERNAME: greenhurricane
-      ME_CONFIG_BASICAUTH_PASSWORD: mGZKfLHmkknev4ccMR6w
-      ME_CONFIG_MONGODB_URL: mongodb://greenhurricane:mGZKfLHmkknev4ccMR6w@mongo:27017/
+      ME_CONFIG_MONGODB_SERVER: "mongodb"
+      ME_CONFIG_BASICAUTH_USERNAME: "greenhurricane"
+      ME_CONFIG_BASICAUTH_PASSWORD: "mGZKfLHmkknev4ccMR6w"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+    networks:
+      - web_network
 
   postgres:
-    image: postgres:13.2
+    image: postgres:15.5-alpine3.18
     restart: always
     environment:
       POSTGRES_USER: greenhurricane
       POSTGRES_PASSWORD: mGZKfLHmkknev4ccMR6w
       POSTGRES_DB: greenhurricane
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     ports:
-      - "5432:5432" 
+      - "5432:5432"
+    networks:
+      - web_network
+
+networks:
+  web_network:
+    driver: bridge
+
+volumes:
+  data:
+  postgres-data:
