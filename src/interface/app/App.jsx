@@ -8,6 +8,7 @@ import Session from "./components/session/Session";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./components/auth/Login";
 import Logout from "./components/auth/Logout";
+import Register from "./components/auth/Register";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/Logout",
