@@ -1,6 +1,7 @@
 const axios = require("axios");
+const nodemailer = require("nodemailer");
 
-const sendEmail = async (
+const sendEmailBlue = async (
   email = "dplopez.sioux@gmail.com",
   name = "Name",
   subject = "This is a test email",
@@ -30,8 +31,6 @@ const sendEmail = async (
       "api-key":
         "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",
       "content-type": "application/json",
-      Cookie:
-        "__cf_bm=_bp2MByzWnzwzhA4uYT6RSY42_lSoKh1caRoeDaQOw8-1700886853-0-ARvrlHmWIR3mEEAz/Uj4DNIkc/CUtl/GEqqys8/VSglx0bQbUnUTlo+JLP6Ngm0Bf82WTmrIAgZpEARvVEa3zOw=",
     },
     data: data,
   };
@@ -39,6 +38,39 @@ const sendEmail = async (
   const response = await axios.request(config);
 
   return response;
+};
+const sendEmail = async (
+  email = "dplopez.sioux@gmail.com",
+  name = "Name",
+  subject = "This is a test email",
+  htmlContent = "<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Brevo.</p></body></html>"
+) => {
+  const smtpConfig = {
+    host: "smtp.email.us-ashburn-1.oci.oraclecloud.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "ocid1.user.oc1..aaaaaaaal4ojruxzj632adbiftzciicop64r5r573ckb2s6deaclkrfozfha@ocid1.tenancy.oc1..aaaaaaaatj5vdm6sz5xqo3snq54x6z2zgtz5n4sqokdf7wqfru7oyr5abluq.mo.com",
+      pass: "Qo>X4nGG[xtSRH+ND4ma",
+    },
+  };
+  try {
+    const transporter = nodemailer.createTransport(smtpConfig);
+
+    const mailOptions = {
+      from: "blueaiassistance_not_replay@blueaiassistance.com",
+      to: email,
+      subject: subject,
+      text: subject,
+      html: htmlContent,
+    };
+
+    let resp = await transporter.sendMail(mailOptions);
+
+    return resp;
+  } catch (error) {
+    return error;
+  }
 };
 
 module.exports = { sendEmail };

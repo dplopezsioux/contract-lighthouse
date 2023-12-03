@@ -21,9 +21,13 @@ const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ where: { email: req.body.email } });
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        { id: user.id },
+        process.env.JWT_SECRET || "secret",
+        {
+          expiresIn: "1h",
+        }
+      );
       return res.json({ message: "Auth ok", token });
     }
     res.status(401).json({ message: "Invalid Auth" });
