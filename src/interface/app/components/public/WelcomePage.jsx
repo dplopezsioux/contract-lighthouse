@@ -15,6 +15,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import confuseImg from "../../img/confuse.png";
+import houseImg from "../../img/house.png";
 
 function Copyright() {
   return (
@@ -91,10 +93,9 @@ export default function WelcomePage() {
             </Stack>
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
+        <Container sx={{ py: 1 }}>
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} md={4}>
+            <Grid item xs={12} sm={6} md={6}>
               <Card
                 sx={{
                   height: "100%",
@@ -106,9 +107,70 @@ export default function WelcomePage() {
                   component="div"
                   sx={{
                     // 16:9
-                    pt: "56.25%",
+                    pt: "100%",
                   }}
-                  image="https://source.unsplash.com/random?wallpapers"
+                  image={confuseImg}
+                />
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Make Lease Contracts Clear and Simple Feeling overwhelmed by
+                    complex lease contract terms? Worried about not fully
+                    understanding what you're signing? This is where our app
+                    comes in, designed to transform your lease contract
+                    experience.
+                  </Typography>
+                  <Typography gutterBottom variant="h6" component="h3">
+                    Understanding the Unfathomable Our app breaks down lease
+                    contracts into simple, easy-to-understand terms. No more
+                    confusion when reading clauses and conditions - we make it
+                    transparent and comprehensible. Whether you're renting your
+                    first home or are an experienced tenant, our tool is your
+                    ally in understanding every aspect of your contract.
+                  </Typography>
+                  <Typography>
+                    Benefits of Using Our App:
+                    <li>
+                      *Clarity in Contracts: We turn complicated legal terms
+                      into straightforward, accessible language.{" "}
+                    </li>
+                    <li>
+                      *Identify Pros and Cons: We help you see the benefits and
+                      potential pitfalls in contracts, enabling you to make
+                      informed decisions.{" "}
+                    </li>
+                    <li>
+                      *Reliable Support: We provide guidance and advice to
+                      navigate the legal aspects of home leasing.{" "}
+                    </li>
+                    <li>
+                      {" "}
+                      *Informed Decision Making: With our help, you can feel
+                      confident and prepared to make the best decision about
+                      your housing.{" "}
+                    </li>
+                    <li>
+                      *Join the community of users who have found peace of mind
+                      and confidence in managing their lease contracts.
+                    </li>
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item xs={12} sm={6} md={6}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <CardMedia
+                  component="div"
+                  sx={{
+                    // 16:9
+                    pt: "100%",
+                  }}
+                  image={houseImg}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography gutterBottom variant="h5" component="h2">
@@ -136,35 +198,6 @@ export default function WelcomePage() {
                 </CardContent>
               </Card>
             </Grid>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardMedia
-                    component="div"
-                    sx={{
-                      // 16:9
-                      pt: "56.25%",
-                    }}
-                    image="https://source.unsplash.com/random?wallpapers"
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe
-                      the content.
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            ))}
           </Grid>
         </Container>
       </main>
