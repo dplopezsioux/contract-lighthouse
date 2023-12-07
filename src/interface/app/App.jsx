@@ -1,14 +1,16 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import WelcomePage from "./components/public/WelcomePage";
-import AboutPage from "./components/public/AboutPage";
-import Dashboard from "./components/dashboard/Dashboard";
-import Settings from "./components/settings/Settings";
-import Session from "./components/session/Session";
+
+const WelcomePage = lazy(() => import("./components/public/WelcomePage"));
+const AboutPage = lazy(() => import("./components/public/AboutPage"));
+const Dashboard = lazy(() => import("./components/dashboard/Dashboard"));
+const Settings = lazy(() => import("./components/settings/Settings"));
+const Session = lazy(() => import("./components/session/Session"));
+const Login = lazy(() => import("./components/auth/Login"));
+const Logout = lazy(() => import("./components/auth/Logout"));
+const Register = lazy(() => import("./components/auth/Register"));
+
 import PrivateRoute from "./PrivateRoute";
-import Login from "./components/auth/Login";
-import Logout from "./components/auth/Logout";
-import Register from "./components/auth/Register";
 
 const router = createBrowserRouter([
   {
@@ -21,21 +23,35 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <Suspense fallback={<div>Cargando...</div>}>
+        <Login />
+      </Suspense>
+    ),
   },
   {
     path: "/register",
-    element: <Register />,
+    element: (
+      <Suspense fallback={<div>Cargando...</div>}>
+        <Register />
+      </Suspense>
+    ),
   },
   {
     path: "/Logout",
-    element: <Logout />,
+    element: (
+      <Suspense fallback={<div>Cargando...</div>}>
+        <Logout />
+      </Suspense>
+    ),
   },
   {
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <Dashboard />
+        <Suspense fallback={<div>Cargando...</div>}>
+          <Dashboard />
+        </Suspense>
       </PrivateRoute>
     ),
   },
@@ -43,7 +59,9 @@ const router = createBrowserRouter([
     path: "/settings",
     element: (
       <PrivateRoute>
-        <Settings />
+        <Suspense fallback={<div>Cargando...</div>}>
+          <Settings />
+        </Suspense>
       </PrivateRoute>
     ),
   },
@@ -51,7 +69,9 @@ const router = createBrowserRouter([
     path: "/session",
     element: (
       <PrivateRoute>
-        <Session />
+        <Suspense fallback={<div>Cargando...</div>}>
+          <Session />
+        </Suspense>
       </PrivateRoute>
     ),
   },

@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  gitlab:
+    image: "gitlab/gitlab-ce:latest"
+    container_name: "gitlab"
+    ports:
+      - "900:80"
+      - "453:443"
+      - "32:22"
+    volumes:
+      - "./gitlab/config:/etc/gitlab"
+      - "./gitlab/logs:/var/log/gitlab"
+      - "./gitlab/data:/var/opt/gitlab"
+
+  jenkins:
+    image: "jenkins/jenkins:lts"
+    container_name: "jenkins"
+    ports:
+      - "8085:8080"
+      - "50000:50000"
+    volumes:
+      - "./jenkins:/var/jenkins_home"
+    depends_on:
+      - gitlab
+
+networks:
+  default:
+    driver: bridge

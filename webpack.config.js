@@ -7,6 +7,7 @@ const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -111,6 +112,9 @@ module.exports = {
   },
   devtool: "inline-source-map", // Source maps for debugging
   plugins: [
+    new CopyPlugin({
+      patterns: [{ from: "./src/interface/favicon.ico", to: "favicon.ico" }],
+    }),
     isDevelopment && new webpack.HotModuleReplacementPlugin(),
     isDevelopment &&
       new ReactRefreshPlugin({
