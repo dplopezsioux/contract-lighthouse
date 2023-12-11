@@ -6,8 +6,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: greenhurricane
       MONGO_INITDB_ROOT_PASSWORD: mGZKfLHmkknev4ccMR6w
-    volumes:
-      - data:/data/db
+    # volumes:
+    #   - data:/data/db
     ports:
       - "27017:27017"
     networks:
@@ -36,8 +36,8 @@ services:
       POSTGRES_USER: greenhurricane
       POSTGRES_PASSWORD: mGZKfLHmkknev4ccMR6w
       POSTGRES_DB: greenhurricane
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
+    # volumes:
+    #   - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
@@ -46,7 +46,6 @@ services:
 networks:
   web_network:
     driver: bridge
-
-volumes:
-  data:
-  postgres-data:
+# volumes:
+#   data:
+#   postgres-data:
