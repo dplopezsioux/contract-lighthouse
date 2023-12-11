@@ -33,9 +33,6 @@ if (isDevelopment) {
     })
   );
   app.use(
-    // FIXME:
-    //  `webpack-hot-middleware` currently does not work reliably with Webpack 5:
-    //  Ref: https://github.com/webpack-contrib/webpack-hot-middleware/pull/397
     require(`@gatsbyjs/webpack-hot-middleware`)(compiler, {
       log: false,
       path: `/__webpack_hmr`,

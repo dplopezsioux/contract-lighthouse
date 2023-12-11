@@ -113,7 +113,20 @@ module.exports = {
   devtool: "inline-source-map", // Source maps for debugging
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: "./src/interface/favicon.ico", to: "favicon.ico" }],
+      patterns: [
+        {
+          from: path.join(
+            __dirname,
+            "src",
+            "interface",
+            "app",
+            "img",
+            "favicon",
+            "favicon.ico"
+          ),
+          to: "favicon.ico",
+        },
+      ],
     }),
     isDevelopment && new webpack.HotModuleReplacementPlugin(),
     isDevelopment &&
